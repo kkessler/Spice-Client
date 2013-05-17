@@ -98,6 +98,15 @@ function handle_mousemove(e)
             DEBUG > 0 && this.sc.log_info("Discarding mouse motion");
         }
     }
+
+    if (this.sc && this.sc.cursor && this.sc.cursor.spice_simulated_cursor)
+    {
+        this.sc.cursor.spice_simulated_cursor.style.display = 'block';
+        this.sc.cursor.spice_simulated_cursor.style.left = e.pageX - this.sc.cursor.spice_simulated_cursor.spice_hot_x + 'px';
+        this.sc.cursor.spice_simulated_cursor.style.top = e.pageY - this.sc.cursor.spice_simulated_cursor.spice_hot_y + 'px';
+        e.preventDefault();
+    }
+
 }
 
 function handle_mousedown(e)
@@ -173,6 +182,26 @@ function handle_keyup(e)
         this.sc.inputs.send_msg(msg);
 
     e.preventDefault();
+}
+
+function sendCtrlAltDel()
+{
+    if (sc && sc.inputs && sc.inputs.state === "ready"){
+        var key = new SpiceMsgcKeyDown();
+        var msg = new SpiceMiniData();
+
+        update_modifier(true, KEY_LCtrl, sc);
+        update_modifier(true, KEY_Alt, sc);
+
+        key.code = KEY_KP_Decimal;
+        msg.build_msg(SPICE_MSGC_INPUTS_KEY_DOWN, key);
+        sc.inputs.send_msg(msg);
+        msg.build_msg(SPICE_MSGC_INPUTS_KEY_UP, key);
+        sc.inputs.send_msg(msg);
+
+        if(Ctrl_state == false) update_modifier(false, KEY_LCtrl, sc);
+        if(Alt_state == false) update_modifier(false, KEY_Alt, sc);
+    }
 }
 
 function update_modifier(state, code, sc)

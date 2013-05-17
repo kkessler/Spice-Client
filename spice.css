@@ -2,6 +2,7 @@ body
 {
   background-color: #999999;
   color: #000000; margin: 0; padding: 0;
+  background-image: -webkit-radial-gradient(left center, circle farthest-corner, #FFFFFF 0%, #3B3B3B 100%);
   font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
   font-size: 12pt;
   line-height: 1.5em;
@@ -67,6 +68,7 @@ body
 #spice-area
 {
     text-align: center;
+	display: none;
 }
 .spice-screen
 {

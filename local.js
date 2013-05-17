@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
 function toggleMessages(){
 	$("#message-div").slideToggle("fast");
 }
@@ -27,8 +26,8 @@ function resizeEvent(){
 	console.log(">> resizeEvent");
 	
 	var h,w;
-	h=$("#spice-screen").height()+180;
-	w=$("#spice-screen").width()+80;
+	h=$("#spice-screen").height();
+	w=$("#spice-screen").width();
 
 	chrome.app.window.current().resizeTo(w,h);
 	console.log("<< resizeEvent");
@@ -67,6 +66,9 @@ function connect()
 
 	try
 	{
+		$("#spice-area").slideToggle("fast");
+		$("#login").fadeToggle("fast");
+
 		sc = new SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div", 
 					message_id: "message-div", password: password, onerror: spice_error });
 	}
