@@ -10,29 +10,40 @@ body
 
 * { margin: 0; }
 
-#login
+#container
 {
-    width: 200px;
+	position: relative;
+}
+.popupbox
+{
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
     padding: 2px 10px 2px 20px;
     border: 1px solid #999999;
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#24414e));
     background-color: #24414e;
     -webkit-border-radius: 10px; 
     border-radius: 10px;
-    display: none;
 }
-#login .icon
+.popupbox label { color: #ffffff; text-shadow: 1px 1px 0px rgba(175, 210, 220, 0.8); }
+.popupbox button
 {
-	display: block;
-	margin-left:70px;
-	margin-right:auto;
-	width:50px;
-	height:50px;
+    padding: 5px 10px 5px 10px;
+    margin-right: auto;
+    text-shadow: #efefef 1px 1px 0px;
+    border: 1px outset #999999;
+    cursor: pointer;
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;
 }
-#login label { color: #ffffff; text-shadow: 1px 1px 0px rgba(175, 210, 220, 0.8); }
+.popupbox button:hover
+{
+    background-color: #666666;
+    color: #ffffff;
+    z-index:10000;
+}
 #login input
 {
     padding: 5px;
@@ -45,48 +56,52 @@ body
     -webkit-box-sizing: border-box;
     width: 100px; 
 }
-#login button
+#login .icon
 {
-    padding: 5px 10px 5px 10px;
-    margin-left: 70px;
-    margin-right: auto;
-    text-shadow: #efefef 1px 1px 0px;
-    border: 1px outset #999999;
-    cursor: pointer;
-    -webkit-border-radius: 5px; 
-    border-radius: 5px;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:50px;
+	height:50px;
 }
-#login button:hover
+.popupbox #connectButton
 {
-    background-color: #666666;
-    color: #ffffff;
-    z-index:10000;
+	margin-left: auto;
 }
-
-#spice-area
+#login
 {
-    text-align: center;
+    width: 200px;
+    	display: none;
+}
+#tools
+{
+	position: absolute;
 	display: none;
+	margin-top: -30px;
+	text-align: center;
+	z-index: 1000;
+}
+#tools button
+{
+	margin-bottom: 2px;
 }
 .spice-screen
 {
     display: inline-block;
-    padding: 10px;
     min-width: 800px;
     min-height: 600px;
-    border: solid #222222 1px;
     background-color: #333333;
     -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    z-index: 999;
+	display: none;
     
 }
 
 .spice-message {
     font-size: 8pt;
     font-family: 'Andale Mono', monospace;
-    width: 700px;
+/*    width: 700px;*/
     height: 100px;
     overflow: auto;
     margin-top: 5px;

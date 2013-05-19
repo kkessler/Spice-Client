@@ -1,5 +1,4 @@
 "use strict";
-
 //02.03.2013 - Modified for use with the GOOGLE CHROME web app platform by Kenan Kessler.
 
 var host = null, port = null;
@@ -7,9 +6,10 @@ var sc,ms;
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('connectButton').onclick = connect;
-//	document.getElementById('messagesButton').onclick = toggleMessages;
-//	document.getElementById('sendCtrlAltDelbutton').onclick = sendCtrlAltDel;
-
+	document.getElementById('disconnectButton').onclick = disconnect;
+	document.getElementById('messagesButton').onclick = toggleMessages;
+	document.getElementById('sendCtrlAltDelbutton').onclick = sendCtrlAltDel;
+	
 
     	$('#login').lightbox_me({
 	centered: true, 
@@ -24,19 +24,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
+	$("#tools").hover(function(){
+		  $(this).filter(':not(:animated)').animate({
+		     marginTop:'0px'
+		  },'fast');
+		},
+		function() {
+		  $(this).animate({
+		     marginTop:'-30px'
+		  },'fast');
+	});
+	
+	
 });
 
 function toggleMessages(){
-	$("#message-div").slideToggle("fast");
+	$("#message-div").toggle();
+	resizeEvent();
 }
 
 function resizeEvent(){
 	console.log(">> resizeEvent");
 	
 	var h,w;
-	h=$("#spice-screen").height();
-	w=$("#spice-screen").width();
+	h=$("#spice-screen").children().height()+25;//+25 for window manager additions, which count in resizing...
+	w=$("#spice-screen").children().width();
 
+	if($("#message-div").is(":visible"))
+	{
+		h+=$("#message-div").height();
+		h+=30;
+	} 
+	
 	chrome.app.window.current().resizeTo(w,h);
 	console.log("<< resizeEvent");
 }
@@ -69,24 +88,13 @@ function connect()
 
 	uri = scheme + host + ":" + port;
 
-	document.getElementById('connectButton').innerHTML = "Stop";
-	document.getElementById('connectButton').onclick = disconnect;
 	
 	try
 	{
-		$("#spice-area").fadeToggle("fast");
-/*		$("#login").hover(function(){
-			  $(this).filter(':not(:animated)').animate({
-			     marginTop:'9px'
-			  },'fast');
-			},
-			function() {
-			  $(this).animate({
-			     marginTop:'-22px'
-			  },'fast');
-		});	
-*/
+		$("#spice-screen").fadeIn("fast");
+		$("#tools").slideDown("fast");
 		$('#login').trigger('close');
+		
 		sc = new SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div", 
 					message_id: "message-div", password: password, onerror: spice_error });
 	}
@@ -106,10 +114,17 @@ function disconnect()
 	if (sc) {
 		sc.stop();
 	}
-	document.getElementById('connectButton').innerHTML = "Start";
-	document.getElementById('connectButton').onclick = connect;
-//	$("#login").fadeToggle("fast");
-	$("#spice-area").fadeToggle("fast");
+	
+	$("#spice-screen").fadeOut("fast");
+	$("#tools").slideUp("fast");
+        $('#login').lightbox_me({
+        centered: true,
+        closeClick: false,
+        onLoad: function() {
+            $('#login').find('input:first').focus()
+            }
+        });
+	
 	console.log("<< disconnect");
 }
 
