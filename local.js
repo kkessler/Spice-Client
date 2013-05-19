@@ -7,16 +7,24 @@ var sc,ms;
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('connectButton').onclick = connect;
-	document.getElementById('messagesButton').onclick = toggleMessages;
+//	document.getElementById('messagesButton').onclick = toggleMessages;
+//	document.getElementById('sendCtrlAltDelbutton').onclick = sendCtrlAltDel;
 
-	$("#spice-screen").resize(function(e){
 
-	resizeEvent();
-
+    	$('#login').lightbox_me({
+	centered: true, 
+	closeClick: false,
+	onLoad: function() { 
+	    $('#login').find('input:first').focus()
+	    }
 	});
+	
+	$("#spice-screen").resize(function(e){
+		resizeEvent();
+	});
+
+
 });
-
-
 
 function toggleMessages(){
 	$("#message-div").slideToggle("fast");
@@ -63,12 +71,22 @@ function connect()
 
 	document.getElementById('connectButton').innerHTML = "Stop";
 	document.getElementById('connectButton').onclick = disconnect;
-
+	
 	try
 	{
-		$("#spice-area").slideToggle("fast");
-		$("#login").fadeToggle("fast");
-
+		$("#spice-area").fadeToggle("fast");
+/*		$("#login").hover(function(){
+			  $(this).filter(':not(:animated)').animate({
+			     marginTop:'9px'
+			  },'fast');
+			},
+			function() {
+			  $(this).animate({
+			     marginTop:'-22px'
+			  },'fast');
+		});	
+*/
+		$('#login').trigger('close');
 		sc = new SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div", 
 					message_id: "message-div", password: password, onerror: spice_error });
 	}
@@ -90,6 +108,8 @@ function disconnect()
 	}
 	document.getElementById('connectButton').innerHTML = "Start";
 	document.getElementById('connectButton').onclick = connect;
+//	$("#login").fadeToggle("fast");
+	$("#spice-area").fadeToggle("fast");
 	console.log("<< disconnect");
 }
 
