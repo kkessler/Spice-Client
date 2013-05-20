@@ -94,7 +94,6 @@ function connect()
 		$("#spice-screen").fadeIn("fast");
 		$("#tools").slideDown("fast");
 		$('#login').trigger('close');
-		$('#spice-screen').css({'cursor': 'none'});
 		
 		sc = new SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div", 
 					message_id: "message-div", password: password, onerror: spice_error });
@@ -117,7 +116,6 @@ function disconnect()
 	}
 	
 	$("#spice-screen").fadeOut("fast");
-	$('#spice-screen').css({'cursor': 'none'});
 	$("#tools").slideUp("fast");
         $('#login').lightbox_me({
         centered: true,
