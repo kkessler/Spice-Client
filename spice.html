@@ -63,29 +63,40 @@
     </head>
 
 
-    <body>
-	<div id="container">
-		<div class="popupbox" id="tools">
-			<button id="sendCtrlAltDelbutton">Send Ctrl+Alt+Del</button>
-			<button id="messagesButton">Messages</button>
-			<button id="disconnectButton">Disconnect</button>
-		</div>
+  <body>
+    <div id="container">
+  
+      <div class="popupbox" id="tools">
+  			<button id="sendCtrlAltDelbutton">Send Ctrl+Alt+Del</button>
+        <button id="toggleFullscreenButton">Fullscreen</button>
+        <button id="advancedButton">Advanced Options...</button>
+  			<button id="disconnectButton">Disconnect</button>
+  		</div>
+      
+      <div class="popupbox" id="advanced">
+        <table border=0>
+          <tr><td colspan=2><label id="advOptLabel">Advanced Options</label></td></tr>
+          <tr><td><input type="checkbox" id="mouseHideCheckbox" defaultChecked="No"/></td><td><label for="mouseHideCheckbox">Hide Local Mouse</label></td></tr>
+          <tr><td><input type="checkbox" id="messagesCheckbox" defaultChecked="No"/></td><td><label for="messagesCheckbox">Show Messages Panel</label></td></tr>
+        </table>
+      </div>
+  
+  		<div class="popupbox" id="login">
+  			<table border="0">
+  				<tr><td colspan=2><img class="icon" src="spice_icon_200.png" alt="SPICE" /></td></tr>
+  				<tr><td><label for="host">Host:</label></td> <td><input type='text' id='host' value='localhost'></td></tr>
+  				<tr><td><label for="port">Port:</label></td> <td><input type='text' id='port' value='5959'></td></tr>
+  				<tr><td><label for="password">Password:</label></td> <td><input type='password' id='password' value='spicy'></td></tr>
+  				<tr><td colspan=2><button id="connectButton">Connect</button></td></tr>
+  			</table>
+  		</div>
 
-		<div class="popupbox" id="login">
-			<table border="0">
-				<tr><td colspan=2><img class="icon" src="spice_icon_200.png" alt="SPICE" /></td></tr>
-				<tr><td><label for="host">Host:</label></td> <td><input type='text' id='host' value='localhost'></td></tr>
-				<tr><td><label for="port">Port:</label></td> <td><input type='text' id='port' value='5959'></td></tr>
-				<tr><td><label for="password">Password:</label></td> <td><input type='password' id='password' value='spicy'></td></tr>
-				<tr><td colspan=2><button id="connectButton">Connect</button></td></tr>
-			</table>
-		</div>
 
-
-	        <div id="spice-screen" class="spice-screen"></div>
-
-
-		<div id="message-div" class="spice-message"></div>
-	</div>
-    </body>
+      <div id="spice-screen" class="spice-screen"></div>
+		  
+      <div id="message-div" class="spice-message"></div>
+    
+	  </div>
+  </body>
 </html>
+

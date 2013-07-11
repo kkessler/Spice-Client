@@ -7,14 +7,18 @@ var sc,ms;
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('connectButton').onclick = connect;
 	document.getElementById('disconnectButton').onclick = disconnect;
-	document.getElementById('messagesButton').onclick = toggleMessages;
+  document.getElementById('mouseHideCheckbox').onclick = toggleMouse;	
+  document.getElementById('messagesCheckbox').onclick = toggleMessages;
 	document.getElementById('sendCtrlAltDelbutton').onclick = sendCtrlAltDel;
+  document.getElementById('toggleFullscreenButton').onclick = toggleFullscreen;
+  document.getElementById('advancedButton').onclick = function(){$("#advanced").lightbox_me({centered: true, closeClick: true});};
 	
 
-    	$('#login').lightbox_me({
-	centered: true, 
-	closeClick: false,
-	onLoad: function() { 
+
+  $('#login').lightbox_me({
+	  centered: true, 
+	  closeClick: false,
+	  onLoad: function() { 
 	    $('#login').find('input:first').focus()
 	    }
 	});
@@ -38,16 +42,60 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 });
 
-function toggleMessages(){
-	$("#message-div").toggle();
-	resizeEvent();
+function toggleFullscreen()
+{
+  if(chrome.app.window.current().isFullscreen())
+  {
+    chrome.app.window.current().restore();
+    $('#toggleFullscreenButton').attr('value', 'Fullscreen');
+  }
+  else
+  {
+    chrome.app.window.current().fullscreen();
+    $('#toggleFullscreenButton').attr('value', 'Restore');
+  }
 }
 
-function resizeEvent(){
+function toggleMessages()
+{
+  console.log(">> toggleMessages:"+$("#messagesCheckbox").is(':checked'));
+
+  switch ($("#messagesCheckbox").is(':checked'))
+  {
+    case true: {$("#message-div").show(); break;}
+    case false: {$("#message-div").hide(); break;}
+    default: {$("#message-div").hide(); break;}
+  }
+  
+	resizeEvent();
+  console.log("<< toggleMessages");
+}
+
+function toggleMouse()
+{
+  console.log(">> toggleMouse:"+$("#mouseHideCheckbox").is(':checked'));
+  
+  switch ($("#mouseHideCheckbox").is(':checked'))
+  {
+    case true: {$("#spice-screen").css('cursor', 'none'); break;}
+    case false: {$("#spice-screen").css('cursor', 'auto'); break;}
+    default: {$("#spice-screen").css('cursor', 'auto'); break;}
+  }
+ 
+  console.log("<< toggleMouse");
+}
+
+function resizeEvent()
+{
 	console.log(">> resizeEvent");
 
   try
   {
+    if(chrome.app.window.current().isFullscreen())
+    {
+      throw "Cannot resize while Fullscreen; aborting resize";
+    }
+    
   	var h,w;
   	h=$("#spice-screen").children().height()+25;//+25 for window manager additions, which count in resizing...
   	w=$("#spice-screen").children().width();
@@ -80,6 +128,7 @@ function resizeEvent(){
 
 function spice_error(e)
 {
+  console.log(e);
 	disconnect();
 }
 
