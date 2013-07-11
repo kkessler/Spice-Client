@@ -45,19 +45,36 @@ function toggleMessages(){
 
 function resizeEvent(){
 	console.log(">> resizeEvent");
-	
-	var h,w;
-	h=$("#spice-screen").children().height()+25;//+25 for window manager additions, which count in resizing...
-	w=$("#spice-screen").children().width();
 
-	if($("#message-div").is(":visible"))
-	{
-		h+=$("#message-div").height();
-		h+=30;
-	} 
-	
-	chrome.app.window.current().resizeTo(w,h);
-	console.log("<< resizeEvent");
+  try
+  {
+  	var h,w;
+  	h=$("#spice-screen").children().height()+25;//+25 for window manager additions, which count in resizing...
+  	w=$("#spice-screen").children().width();
+  
+  	if($("#message-div").is(":visible"))
+  	{
+  		h+=$("#message-div").height();
+  		h+=30;
+  	} 
+    
+    if(w == null || h === 25)
+    {
+      throw "Cannot resize to "+w+"x"+h+"; aborting resize";
+    }
+    
+    console.log("resizing to "+w+"x"+h);
+  	chrome.app.window.current().resizeTo(w,h);
+  }
+  catch (e)
+  {
+    console.log(e);
+  }
+  finally
+  {
+    console.log("<< resizeEvent");  
+  }
+  
 }
 
 
