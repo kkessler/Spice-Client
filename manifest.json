@@ -1,7 +1,7 @@
 {
   "name": "Spice Client",
   "description": "Spice Client App for Chrome",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "manifest_version": 2,
   "app": {
     "background": {

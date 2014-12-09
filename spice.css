@@ -2,7 +2,6 @@ body
 {
   background-color: #999999;
   color: #000000; margin: 0; padding: 0;
-  background-image: -webkit-radial-gradient(left center, circle farthest-corner, #FFFFFF 0%, #3B3B3B 100%);
   font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
   font-size: 12pt;
   line-height: 1.5em;
@@ -79,21 +78,40 @@ body
 }
 #login
 {
-    width: 200px;
+    	width: 200px;
     	display: none;
+	z-index: 10;
 }
 #tools
 {
 	position: absolute;
-	display: none;
 	margin-top: -30px;
 	text-align: center;
-	z-index: 1000;
+	width: 500px;
+	z-index: 1002;
 }
 #advanced
 {
-    width: 200px;
-    display: none;
+	width: 200px;
+	display: none;
+}
+#errorLabel {
+	font-family: 'DejaVu Sans',bold, Arial, sans-serif;
+	font-size: 125%;
+}
+#errorMessage {
+	font-family: 'DejaVu Sans', Arial, sans-serif;
+        font-size: 90%;
+}
+#connectError
+{
+	width: 200px;
+	display: none;
+	background: #24414E;
+}
+#connectError p
+{
+	color: #EDDDDD;
 }
 #tools button
 {
@@ -101,43 +119,43 @@ body
 }
 .spice-screen
 {
-    display: inline;
-    min-width: 800px;
-    min-height: 600px;
-    background-color: #333333;
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    z-index: 999;
+display: inline;
+	 min-width: 800px;
+	 min-height: 600px;
+	 background-color: #333333;
+	 -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	 box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	 z-index: 999;
 }
 
 .spice-message {
-    font-size: 8pt;
-    font-family: 'Andale Mono', monospace;
-    height: 100px;
-    overflow: auto;
-    margin-top: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    background-color: #efefef;
-    border: solid #c3c3c3 2px;
-    line-height: 1.1em;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-	  display: none;
+	font-size: 8pt;
+	font-family: 'Andale Mono', monospace;
+height: 100px;
+overflow: auto;
+	  margin-top: 5px;
+	  margin-left: auto;
+	  margin-right: auto;
+padding: 10px;
+	 background-color: #efefef;
+border: solid #c3c3c3 2px;
+	line-height: 1.1em;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+display: none;
 }
 
 .spice-message p {
-    margin-bottom: 0em;
-    margin-top: 0em;
+	margin-bottom: 0em;
+	margin-top: 0em;
 }
 
 .spice-message-warning {
-    color: orange;
+color: orange;
 }
 .spice-message-error {
-    color: red;
+color: red;
 }
 

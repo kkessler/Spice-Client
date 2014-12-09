@@ -7,38 +7,39 @@ var sc,ms;
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('connectButton').onclick = connect;
 	document.getElementById('disconnectButton').onclick = disconnect;
-  document.getElementById('mouseHideCheckbox').onclick = toggleMouse;	
-  document.getElementById('messagesCheckbox').onclick = toggleMessages;
+	document.getElementById('mouseHideCheckbox').onclick = toggleMouse;	
+	document.getElementById('messagesCheckbox').onclick = toggleMessages;
 	document.getElementById('sendCtrlAltDelbutton').onclick = sendCtrlAltDel;
-  document.getElementById('toggleFullscreenButton').onclick = toggleFullscreen;
-  document.getElementById('advancedButton').onclick = function(){$("#advanced").lightbox_me({centered: true, closeClick: true});};
-	
+	document.getElementById('toggleFullscreenButton').onclick = toggleFullscreen;
+	document.getElementById('advancedButton').onclick = function(){$("#advanced").lightbox_me({centered: true, closeClick: true});};
 
 
-  $('#login').lightbox_me({
-	  centered: true, 
-	  closeClick: false,
-	  onLoad: function() { 
-	    $('#login').find('input:first').focus()
-	    }
+
+	$('#login').lightbox_me({
+		centered: true, 
+		closeClick: false,
+		onLoad: function() { 
+			$('#login').find('input:first').focus()
+		}
 	});
-	
+
 	$("#spice-screen").resize(function(e){
 		resizeEvent();
 	});
 
 
 	$("#tools").hover(function(){
-		  $(this).filter(':not(:animated)').animate({
-		     marginTop:'0px'
-		  },'fast');
-		},
-		function() {
-		  $(this).animate({
-		     marginTop:'-30px'
-		  },'fast');
+		$(this).filter(':not(:animated)').animate({
+			marginTop:'0px'
+		},'fast');
+	},
+	function() {
+		$(this).animate({
+			marginTop:'-30px'
+		},'fast');
 	});
-	
+
+
 	
 });
 
@@ -128,8 +129,8 @@ function resizeEvent()
 
 function spice_error(e)
 {
-  console.log(e);
-	disconnect();
+	document.getElementById("errorMessage").innerHTML="Error: A valid Websockets to Raw sockets proxy was not found at "+document.getElementById("host").value+":"+document.getElementById("port").value;
+	$("#connectError").lightbox_me({centered: true, closeClick: true, onClose: disconnect});
 }
 
 function connect()
@@ -158,7 +159,6 @@ function connect()
 	try
 	{
 		$("#spice-screen").fadeIn("fast");
-		$("#tools").slideDown("fast");
 		$('#login').trigger('close');
 		
 		sc = new SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div", 
@@ -166,7 +166,6 @@ function connect()
 	}
 	catch (e)
 	{
-		alert(e.toString());
 		disconnect();
 	}
 
@@ -182,7 +181,7 @@ function disconnect()
 	}
 	
 	$("#spice-screen").fadeOut("fast");
-	$("#tools").slideUp("fast");
+//	$("#tools").slideUp("fast");
         $('#login').lightbox_me({
         centered: true,
         closeClick: false,

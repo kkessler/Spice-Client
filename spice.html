@@ -1,102 +1,109 @@
 <!--
-   Copyright (C) 2012 by Jeremy P. White <jwhite@codeweavers.com>
+Copyright (C) 2012 by Jeremy P. White <jwhite@codeweavers.com>
 
-   This file is part of spice-html5.
+This file is part of spice-html5.
 
-   spice-html5 is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
+spice-html5 is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-   spice-html5 is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
+spice-html5 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public License
-   along with spice-html5.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Lesser General Public License
+along with spice-html5.  If not, see <http://www.gnu.org/licenses/>.
 
-   --------------------------------------------------
-    Spice Javascript client template.
-    Refer to main.js for more detailed information
-   --------------------------------------------------
+--------------------------------------------------
+Spice Javascript client template.
+Refer to main.js for more detailed information
+--------------------------------------------------
 
-   02.03.2013 - Modified for use with the GOOGLE CHROME web app platform by Kenan Kessler.
+02.03.2013 - Modified for use with the GOOGLE CHROME web app platform by Kenan Kessler.
 
 -->
 
 <!doctype html>
 <html>
-    <head>
+	<head>
 
-        <title>Spice Client</title>
-        <script src="enums.js"></script> 
-        <script src="atKeynames.js"></script> 
-        <script src="utils.js"></script> 
-        <script src="png.js"></script> 
-        <script src="lz.js"></script> 
-        <script src="quic.js"></script> 
-        <script src="bitmap.js"></script> 
-        <script src="spicedataview.js"></script> 
-        <script src="spicetype.js"></script> 
-        <script src="spicemsg.js"></script> 
-        <script src="wire.js"></script> 
-        <script src="spiceconn.js"></script> 
-        <script src="display.js"></script> 
-        <script src="main.js"></script> 
-        <script src="inputs.js"></script> 
-        <script src="cursor.js"></script> 
-        <script src="thirdparty/jsbn.js"></script>
-        <script src="thirdparty/rsa.js"></script>
-        <script src="thirdparty/prng4.js"></script>
-        <script src="thirdparty/rng.js"></script>
-        <script src="thirdparty/sha1.js"></script>
-        <script src="ticket.js"></script>
-        
-        <script src="local.js"></script>
-        <script src="thirdparty/jquery-1.9.1.min.js"></script>
-        <script src="thirdparty/jquery.ba-resize.min.js"></script>
-        <script src="thirdparty/jquery.lightbox_me.js"></script>
-        
-        <link rel="stylesheet" type="text/css" href="spice.css" />
-        
-    </head>
+		<title>Spice Client</title>
+		<script src="enums.js"></script> 
+		<script src="atKeynames.js"></script> 
+		<script src="utils.js"></script> 
+		<script src="png.js"></script> 
+		<script src="lz.js"></script> 
+		<script src="quic.js"></script> 
+		<script src="bitmap.js"></script> 
+		<script src="spicedataview.js"></script> 
+		<script src="spicetype.js"></script> 
+		<script src="spicemsg.js"></script> 
+		<script src="wire.js"></script> 
+		<script src="spiceconn.js"></script> 
+		<script src="display.js"></script> 
+		<script src="main.js"></script> 
+		<script src="inputs.js"></script> 
+		<script src="cursor.js"></script> 
+		<script src="thirdparty/jsbn.js"></script>
+		<script src="thirdparty/rsa.js"></script>
+		<script src="thirdparty/prng4.js"></script>
+		<script src="thirdparty/rng.js"></script>
+		<script src="thirdparty/sha1.js"></script>
+		<script src="ticket.js"></script>
 
+		<script src="local.js"></script>
+		<script src="thirdparty/jquery-1.9.1.min.js"></script>
+		<script src="thirdparty/jquery.ba-resize.min.js"></script>
+		<script src="thirdparty/jquery.lightbox_me.js"></script>
 
-  <body>
-    <div id="container">
-  
-      <div class="popupbox" id="tools">
-  			<button id="sendCtrlAltDelbutton">Send Ctrl+Alt+Del</button>
-        <button id="toggleFullscreenButton">Fullscreen</button>
-        <button id="advancedButton">Advanced Options...</button>
-  			<button id="disconnectButton">Disconnect</button>
-  		</div>
-      
-      <div class="popupbox" id="advanced">
-        <table border=0>
-          <tr><td colspan=2><label id="advOptLabel">Advanced Options</label></td></tr>
-          <tr><td><input type="checkbox" id="mouseHideCheckbox" defaultChecked="No"/></td><td><label for="mouseHideCheckbox">Hide Local Mouse</label></td></tr>
-          <tr><td><input type="checkbox" id="messagesCheckbox" defaultChecked="No"/></td><td><label for="messagesCheckbox">Show Messages Panel</label></td></tr>
-        </table>
-      </div>
-  
-  		<div class="popupbox" id="login">
-  			<table border="0">
-  				<tr><td colspan=2><img class="icon" src="spice_icon_200.png" alt="SPICE" /></td></tr>
-  				<tr><td><label for="host">Host:</label></td> <td><input type='text' id='host' value='localhost'></td></tr>
-  				<tr><td><label for="port">Port:</label></td> <td><input type='text' id='port' value='5959'></td></tr>
-  				<tr><td><label for="password">Password:</label></td> <td><input type='password' id='password' value='spicy'></td></tr>
-  				<tr><td colspan=2><button id="connectButton">Connect</button></td></tr>
-  			</table>
-  		</div>
+		<link rel="stylesheet" type="text/css" href="spice.css" />
+
+	</head>
 
 
-      <div id="spice-screen" class="spice-screen"></div>
-		  
-      <div id="message-div" class="spice-message"></div>
-    
-	  </div>
-  </body>
+	<body>
+		<div id="container">
+
+			<div class="popupbox" id="tools">
+				<button id="sendCtrlAltDelbutton">Send Ctrl+Alt+Del</button>
+				<button id="toggleFullscreenButton">Fullscreen</button>
+				<button id="advancedButton">Advanced Options...</button>
+				<button id="disconnectButton">Disconnect</button>
+			</div>
+
+			<div class="popupbox" id="advanced">
+				<table border=0>
+					<tr><td colspan=2><label id="advOptLabel">Advanced Options</label></td></tr>
+					<tr><td><input type="checkbox" id="mouseHideCheckbox" defaultChecked="No"/></td><td><label for="mouseHideCheckbox">Hide Local Mouse</label></td></tr>
+					<tr><td><input type="checkbox" id="messagesCheckbox" defaultChecked="No"/></td><td><label for="messagesCheckbox">Show Messages Panel</label></td></tr>
+				</table>
+			</div>
+
+			<div class="popupbox" id="connectError">
+				<table border=0>
+					<tr><td colspan=2><label id="errorLabel">Connection Error</label></td></tr>
+					<tr><td><p id="errorMessage"></p></td></tr>
+				</table>
+			</div>
+
+			<div class="popupbox" id="login">
+				<table border="0">
+					<tr><td colspan=2><img class="icon" src="spice_icon_200.png" alt="SPICE" /></td></tr>
+					<tr><td><label for="host">Host:</label></td> <td><input type='text' id='host' value='localhost'></td></tr>
+					<tr><td><label for="port">Port:</label></td> <td><input type='text' id='port' value='5959'></td></tr>
+					<tr><td><label for="password">Password:</label></td> <td><input type='password' id='password' value='spicy'></td></tr>
+					<tr><td colspan=2><button id="connectButton">Connect</button></td></tr>
+				</table>
+			</div>
+
+
+			<div id="spice-screen" class="spice-screen"></div>
+
+			<div id="message-div" class="spice-message"></div>
+
+		</div>
+	</body>
 </html>
 
